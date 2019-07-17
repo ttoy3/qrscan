@@ -21,7 +21,11 @@ function qrscan(){
   });
   Instascan.Camera.getCameras().then(function (cameras) {
     if (cameras.length > 0) {
-      scanner.start(cameras[0]);
+      var cam=cameras[0];
+      if (cameras.length>1) {
+          cam=cameras[1];
+      }
+      scanner.start(cam);
     } else {
       console.error('No cameras found.');
     }
