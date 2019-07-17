@@ -11,6 +11,7 @@ function qrscan(){
     console.log(content);
     var el = document.getElementById('result');
     el.innerText=content;
+    el.style.color='red';
     if (location.hash.length>8) {
         $.post(location.hash.substr(1),{qrcode:content},function(result){
             el.style.color='green';
