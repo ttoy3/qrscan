@@ -16,10 +16,12 @@
         console.log(content);
         var el = document.getElementById('result');
         el.innerText=content;
-        $.post('https://soyshop.herokuapp.com/hello.php',{qrcode:content},function(result){
-            console.log('post result:',result);
-            el.style.color='green';
-        });
+        if (location.hash.length>8) {
+            $.post(location.hash.substr(1),{qrcode:content},function(result){
+                el.style.color='green';
+                console.log('post result:',result);
+            });
+        }
       });
       Instascan.Camera.getCameras().then(function (cameras) {
         if (cameras.length > 0) {
