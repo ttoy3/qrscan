@@ -1,37 +1,32 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>qrscan</title>
-    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webrtc-adapter/3.3.3/adapter.min.js"></script> -->
-    <!-- <script type="text/javascript" src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script> -->
-    <script type="text/javascript" src="instascan.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  </head>
-  <body>
-    <h3 id="result">Scanning ...</h3>
-    <video id="preview"></video>
-    <script type="text/javascript">
-      let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
-      scanner.addListener('scan', function (content) {
-        console.log(content);
-        var el = document.getElementById('result');
-        el.innerText=content;
-        if (location.hash.length>8) {
-            $.post(location.hash.substr(1),{qrcode:content},function(result){
-                el.style.color='green';
-                console.log('post result:',result);
-            });
-        }
-      });
-      Instascan.Camera.getCameras().then(function (cameras) {
-        if (cameras.length > 0) {
-          scanner.start(cameras[0]);
-        } else {
-          console.error('No cameras found.');
-        }
-      }).catch(function (e) {
-        console.error(e);
-      });
-    </script>
-  </body>
-</html>
+<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webrtc-adapter/3.3.3/adapter.min.js"></script> -->
+<h3 id="result">Scanning ...</h3>
+<video id="preview"></video>
+<!-- <script type="text/javascript" src="instascan.min.js"></script> -->
+<script src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript">
+function qrscan(){
+  let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
+  scanner.addListener('scan', function (content) {
+    console.log(content);
+    var el = document.getElementById('result');
+    el.innerText=content;
+    if (location.hash.length>8) {
+        $.post(location.hash.substr(1),{qrcode:content},function(result){
+            el.style.color='green';
+            console.log('post result:',result);
+        });
+    }
+  });
+  Instascan.Camera.getCameras().then(function (cameras) {
+    if (cameras.length > 0) {
+      scanner.start(cameras[0]);
+    } else {
+      console.error('No cameras found.');
+    }
+  }).catch(function (e) {
+    console.error(e);
+  });
+}
+qrscan();
+</script>
