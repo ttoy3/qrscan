@@ -18,6 +18,7 @@
         el.innerText=content;
         $.post('https://soyshop.herokuapp.com/hello.php',{qrcode:content},function(result){
             console.log('post result:',result);
+            el.style.color='green';
         });
       });
       Instascan.Camera.getCameras().then(function (cameras) {
