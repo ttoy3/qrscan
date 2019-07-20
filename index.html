@@ -6,7 +6,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript">
 function qrscan(){
-  let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
+  let scanner = new Instascan.Scanner({ video: document.getElementById('preview'), mirror: false });
   scanner.addListener('scan', function (content) {
     console.log(content);
     var el = document.getElementById('qrcode');
@@ -30,8 +30,4 @@ function qrscan(){
   });
 }
 qrscan();
-function flipx(){
-    document.getElementById('preview').style.transform='';
-}
-setTimeout(flipx,5000);
 </script>
