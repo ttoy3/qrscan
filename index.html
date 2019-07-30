@@ -1,3 +1,4 @@
+<meta charset="utf-8">
 <div style="text-align:center;">
     <video id="preview" style="width:75%;"></video>
 </div>
@@ -37,6 +38,7 @@ function qrscan(){
     }
   });
   Instascan.Camera.getCameras().then(function (cameras) {
+    console.log(cameras);
     if (cameras.length > 0) {
       scanner.start(cameras[cameras.length-1]);
     } else {
